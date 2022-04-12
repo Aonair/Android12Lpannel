@@ -11,7 +11,8 @@
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="20dp">
+        android:backgroundTint="@color/black"
+        app:cardCornerRadius="00dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,13 +28,24 @@
                 android:padding="10dp"
                 android:text="Displaying over other apps!"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/window_close"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Remove" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@drawable/notification"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:padding="0dp">
 
         </LinearLayout>
 
