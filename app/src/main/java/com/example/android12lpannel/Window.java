@@ -27,9 +27,8 @@ public class Window {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // set the layout parameters of the window
             mParams = new WindowManager.LayoutParams(
-                    // Shrink the window to wrap the content rather
-                    // than filling the screen
-                    WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,
+                    // full screen
+                    WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT,
                     // Display it on top of other application windows
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                     // Don't let it grab the input focus
@@ -53,7 +52,7 @@ public class Window {
         });
         // Define the position of the
         // window within the screen
-        mParams.gravity = Gravity.CENTER;
+        mParams.gravity = Gravity.TOP;
         mWindowManager = (WindowManager)context.getSystemService(WINDOW_SERVICE);
 
     }
