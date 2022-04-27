@@ -5,6 +5,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // method to ask user to grant the Overlay permission
-    public void checkOverlayPermission(){
+    public void checkOverlayPermission() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
@@ -29,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // method for starting the service
-    public void startService(){
+    public void startService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // check if the user has already granted
             // the Draw over other apps permission

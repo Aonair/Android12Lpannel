@@ -28,8 +28,9 @@ public class ForegroundService extends Service {
         // based on the android version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             startMyOwnForeground();
-        else
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
             startForeground(1, new Notification());
+        }
 
         // create an instance of Window class
         // and display the content on screen

@@ -8,46 +8,54 @@
     android:background="@null">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/notificationLayout"
+        android:onClick="expand"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
+        android:layout_alignParentTop="true"
         app:cardCornerRadius="00dp">
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="top"
             android:orientation="vertical"
             android:padding="0dp">
 
             <TextView
-                android:id="@+id/titleText"
+                android:id="@+id/titleText1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:text="Displaying over other apps!"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/titleText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:text="Displaying over other apps!"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:visibility="gone" />
 
             <Button
-                android:id="@+id/window_close"
+                android:id="@+id/window_expand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remove" />
+                android:text="Expand" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:background="@drawable/notification"
-            android:orientation="vertical"
-            android:layout_gravity="bottom"
-            android:padding="0dp">
-
-        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
