@@ -3,12 +3,16 @@ package com.example.android12lpannel;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import static android.content.Context.WINDOW_SERVICE;
 
@@ -21,8 +25,13 @@ public class Window {
     private WindowManager mWindowManager;
     private LayoutInflater layoutInflater;
 
+
+    TextView detailsText;
+    LinearLayout layout;
+
     public Window(Context context){
         this.context=context;
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // set the layout parameters of the window
@@ -36,20 +45,24 @@ public class Window {
                     // Make the underlying application window visible
                     // through any transparent parts
                     PixelFormat.TRANSLUCENT);
-
         }
         // getting a LayoutInflater
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         // inflating the view with the custom layout we created
         mView = layoutInflater.inflate(R.layout.popup_window, null);
+        // initialize expand paramater
+        detailsText = mView.findViewById(R.id.titleText2);
+        layout = mView.findViewById(R.id.layout);
         // set onClickListener on the remove button, which removes
         // the view from the window
-        mView.findViewById(R.id.window_close).setOnClickListener(new View.OnClickListener() {
+        mView.findViewById(R.id.window_expand).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                close();
+                expand(view);
             }
         });
+
+
         // Define the position of the
         // window within the screen
         mParams.gravity = Gravity.TOP;
@@ -88,5 +101,12 @@ public class Window {
         } catch (Exception e) {
             Log.d("Error2",e.toString());
         }
+    }
+
+    public void expand(View view) {
+        int v = (detailsText.getVisibility() == View.GONE)? View.VISIBLE: View.GONE;
+
+        TransitionManager.beginDelayedTransition(layout, new AutoTransition());
+        detailsText.setVisibility(v);
     }
 }
