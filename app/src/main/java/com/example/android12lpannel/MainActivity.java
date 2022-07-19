@@ -19,8 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     // method to ask user to grant the Overlay permission
     public void checkOverlayPermission(){
-
+        //build version must be higher than Marshmellow
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //check manifest overlay permission
             if (!Settings.canDrawOverlays(this)) {
                 // send user to the device settings
                 startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // method for starting the service
     public void startService(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // check if the user has already granted
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             startService(new Intent(this, ForegroundService.class));
         }
     }
-
 
     // check for permission again when user grants it from
     // the device settings, and start the service

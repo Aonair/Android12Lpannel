@@ -12,8 +12,16 @@ import android.os.IBinder;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+//creation own service
 public class ForegroundService extends Service {
     public ForegroundService() {
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        //using the super command, so we don't need to
+        //manage the stop of the service
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -27,7 +35,7 @@ public class ForegroundService extends Service {
         // create the custom or default notification
         // based on the android version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            startMyOwnForeground();
+            startMyForeground();
         else
             startForeground(1, new Notification());
 
@@ -37,25 +45,21 @@ public class ForegroundService extends Service {
         window.open();
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
-    }
-
     // for android version >=O we need to create
     // custom notification stating
     // foreground service is running
     @RequiresApi(Build.VERSION_CODES.O)
-    private void startMyOwnForeground(){
-        String NOTIFICATION_CHANNEL_ID = "example.permanence";
+    private void startMyForeground(){
+        String notificationChannelId = "example.permanence";
         String channelName = "Background Service";
-        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_MIN);
 
+        //new channel -> notification group
+        NotificationChannel channel = new NotificationChannel(notificationChannelId, channelName, NotificationManager.IMPORTANCE_HIGH);
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         assert manager != null;
-        manager.createNotificationChannel(chan);
+        manager.createNotificationChannel(channel);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationChannelId);
         Notification notification = notificationBuilder.setOngoing(true)
                 .setContentTitle("Service running")
                 .setContentText("Displaying over other apps")
